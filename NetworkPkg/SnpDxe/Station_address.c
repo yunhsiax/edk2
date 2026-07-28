@@ -164,6 +164,13 @@ PxeSetStnAddr (
   //
   PxeGetStnAddr (Snp);
 
+  //
+  // Store the full requested address so all 32 bytes of CurrentAddress match New (UEFI SCT StationAddress conformance).
+  //
+  if (NewMacAddr != NULL) {
+    CopyMem (&Snp->Mode.CurrentAddress, NewMacAddr, sizeof (EFI_MAC_ADDRESS));
+  }
+
   return EFI_SUCCESS;
 }
 
